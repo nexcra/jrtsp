@@ -17,57 +17,54 @@
  *  under the License. 
  *  
  */
+package examples.example1;
 
-package heye.rtsp.net;
-
-
-import java.net.URI;
-import java.net.URISyntaxException;
+import heye.rtsp.action.RtspAction;
+import heye.rtsp.protocol.RtspMessage;
+import heye.rtsp.protocol.RtspRequest;
+import heye.rtsp.protocol.RtspResponse;
 
 /**
  * @author Jiang Ying
  *
  */
-public class RtspUrl {
-	
-	private URI rtspUrl;
-	
-	public RtspUrl(String host, int port, String file) throws URISyntaxException {
+public class SetupAction extends RtspAction {
 
-		String asset = file.startsWith("/") ? file : "/".concat(file);
+	Example1 client;
+	/**
+	 * 
+	 */
+	SetupAction(Example1 ex){
+		this();
+		client = ex;
+	}
+	
+	SetupAction() {
+		// TODO Auto-generated constructor stub
+		super();
+	}
+	
 
-		rtspUrl = new URI("rtsp",null,host,port,asset,null,null);
 
+	public void execute(RtspMessage msg) {
+		RtspResponse response = (RtspResponse)msg;
+		System.out.println(response.GetBody());
+		
+		RtspRequest msg1 = new RtspRequest();
+		msg1.SetMethod("TEARDOWN");
+		msg1.SetContext("rtsp://218.24.6.115:5555/wuji");
+		msg1.SetHeader("CSeq", "2");
+		msg1.SetHeader("Session", response.GetHeader("Session"));
+		msg1.SetHeader("User-Agent", "Coship RTSP Client 1.0");
+		
+		client.stop(msg1);
 	}
-	
-	public RtspUrl(String url) throws URISyntaxException {
-		rtspUrl = new URI(url);
-	}
-	
-	public String toString() {
-		return rtspUrl == null ? null : rtspUrl.toString();
-	}
-	
-	public String GetHost() {
-		return rtspUrl.getHost();
-	}
-	
-	public int GetPort() {
-		return rtspUrl.getPort();
-	}
-	
-	public String GetAsset() {
-		return rtspUrl.getPath();
-	}
-
 	/**
 	 * @param args
-	 * @throws URISyntaxException 
 	 */
-	public static void main(String[] args) throws URISyntaxException {
+	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		RtspUrl url = new RtspUrl("10.10.10.1",5555,"/wuji");
-		System.out.println(url.toString());
+
 	}
 
 }

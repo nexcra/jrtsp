@@ -3,5 +3,9 @@
 	<classpathentry kind="src" path=""/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="D:/program source/thridparty/mina-1.0.6/mina-core-1.0.6.jar"/>
+	<classpathentry kind="lib" path="D:/program source/thridparty/slf4j-1.4.3/slf4j-api-1.4.3.jar"/>
+	<classpathentry kind="lib" path="D:/program source/thridparty/slf4j-1.4.3/slf4j-jdk14-1.4.3.jar"/>
+	<classpathentry kind="lib" path="D:/program source/thridparty/backport-util-concurrent-3.0/backport-util-concurrent.jar"/>
+	<classpathentry kind="lib" path="D:/program source/Workspace/jbcl.jar"/>
 	<classpathentry kind="output" path=""/>
 </classpath>
